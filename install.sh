@@ -10,7 +10,7 @@ fi
 
 if [ ! -d .vim/bundle/Vundle ]
 then
-    git clone https://github.com/gmarik/Vundle.vim.git  .vim/bundle/Vundle.vim
+    git clone https://github.com/gmarik/Vundle.vim.git  vim/bundle/Vundle.vim
 fi
 if [ ! -d oh-my-zsh ]
 then

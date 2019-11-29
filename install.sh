@@ -23,4 +23,11 @@ ln -s `pwd`/gitconfig ~/.gitconfig
 ln -s `pwd`/zshrc ~/.zshrc
 ln -s `pwd`/oh-my-zsh ~/.oh-my-zsh
 
+
+if [[ -d "${HOME}/bin/" ]]; then
+else
+	mkdir ${HOME}/bin
+fi
+cp git-proxy ${HOME}/bin/
+
 # Now open vim and do `BundleInstall`

@@ -113,8 +113,11 @@ bg() {
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 
 # path of Android Studio platform tools
-export PATH="/usr/local/Cellar/coreutils/8.28_1/libexec/gnubin:$HOME/bin:$PATH"
-export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+if [ "$(uname)" == "Darwin" ]; then
+else
+	export PATH="/usr/local/Cellar/coreutils/8.28_1/libexec/gnubin:$HOME/bin:$PATH"
+	export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+fi
 
 # shadowsocket http proxy
 proxyon() {
@@ -122,14 +125,19 @@ proxyon() {
 	# networksetup -setwebproxy "Wi-Fi" 127.0.0.1 1087
 	# networksetup -setsecurewebproxy "Wi-Fi" 127.0.0.1 1087
 
-	export https_proxy=http://127.0.0.1:7890;export http_proxy=http://127.0.0.1:7890;export all_proxy=socks5://127.0.0.1:7891
-	networksetup -setwebproxy "Wi-Fi" 127.0.0.1 7890
-	networksetup -setsecurewebproxy "Wi-Fi" 127.0.0.1 7890
-	networksetup -setsocksfirewallproxy "Wi-Fi" 127.0.0.1 7891
+	export https_proxy=https://127.0.0.1:7890; export http_proxy=http://127.0.0.1:7890; export socks5_proxy=127.0.0.1:7891
+	git config --global http.proxy ${http_proxy}; git config --global https.proxy ${https_proxy}; git config --global core.gitproxy "git-proxy"
+	# git config --global core.gitproxy ${all_proxy}
 
-	networksetup -setwebproxystate "Wi-Fi" on
-	networksetup -setsecurewebproxystate "Wi-Fi" on
-	networksetup -setsocksfirewallproxystate "Wi-Fi" on
+	if [ "$(uname)" == "Darwin" ]; then
+		networksetup -setwebproxy "Wi-Fi" 127.0.0.1 7890
+		networksetup -setsecurewebproxy "Wi-Fi" 127.0.0.1 7890
+		networksetup -setsocksfirewallproxy "Wi-Fi" 127.0.0.1 7891
+
+		networksetup -setwebproxystate "Wi-Fi" on
+		networksetup -setsecurewebproxystate "Wi-Fi" on
+		networksetup -setsocksfirewallproxystate "Wi-Fi" on
+	fi
 	#
 	curl ip.gs
 }
@@ -138,14 +146,34 @@ proxyoff() {
     export http_proxy=
     export https_proxy=
 	export all_proxy=
-	networksetup -setwebproxystate "Wi-Fi" off
-	networksetup -setsecurewebproxystate "Wi-Fi" off
-	networksetup -setsocksfirewallproxystate "Wi-Fi" off
+	git config --global --unset http.proxy
+	git config --global --unset https.proxy
+	git config --global --unset core.gitproxy
+	git config --global --unset socks.proxy
+
+	if [ "$(uname)" == "Darwin" ]; then
+		networksetup -setwebproxystate "Wi-Fi" off
+		networksetup -setsecurewebproxystate "Wi-Fi" off
+		networksetup -setsocksfirewallproxystate "Wi-Fi" off
+	fi
 
 	curl ip.gs
 }
-GREP_OPTIONS="--exclude-dir=.git"
-GREP_OPTIONS+=" --exclude=tags"
+
+sshtunnelon() {
+	autossh -p 22 -M 6777 -f -NR 6767:localhost:22 james@47.95.213.125
+}
+sshtunneloff() {
+	pkill -3 autossh
+	pkill -f ssh.*6777.*james
+}
+
+checkdd() {
+	# sudo watch kill -USR1 $(pgrep ^dd)
+	sudo kill -USR1 $(pgrep ^dd)
+}
+
+export GREP_OPTIONS="-irns --exclude-dir=.git --exclude=tags"
 
 # path of anaconda3
 scipyon() {

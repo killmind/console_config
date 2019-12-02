@@ -25,6 +25,7 @@ ln -s `pwd`/oh-my-zsh ~/.oh-my-zsh
 
 
 if [[ -d "${HOME}/bin/" ]]; then
+	echo "found ${HOME}/bin/"
 else
 	mkdir ${HOME}/bin
 fi

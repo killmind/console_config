@@ -125,8 +125,8 @@ proxyon() {
 	# networksetup -setwebproxy "Wi-Fi" 127.0.0.1 1087
 	# networksetup -setsecurewebproxy "Wi-Fi" 127.0.0.1 1087
 
-	export https_proxy=https://127.0.0.1:7890; export http_proxy=http://127.0.0.1:7890; export socks5_proxy=127.0.0.1:7891
-	git config --global http.proxy ${http_proxy}; git config --global https.proxy ${https_proxy}; git config --global core.gitproxy "git-proxy"
+	export https_proxy=http://127.0.0.1:7890; export http_proxy=http://127.0.0.1:7890; export socks5_proxy=127.0.0.1:7891
+	git config --global http.proxy ${http_proxy}; git config --global https.proxy ${https_proxy}; git config --global core.gitproxy "git-proxy"; git config --global socks.proxy "socks5://"${socks5_proxy}
 	# git config --global core.gitproxy ${all_proxy}
 
 	if [ "$(uname)" == "Darwin" ]; then
@@ -146,6 +146,7 @@ proxyoff() {
     export http_proxy=
     export https_proxy=
 	export all_proxy=
+	export socks5_proxy=
 	git config --global --unset http.proxy
 	git config --global --unset https.proxy
 	git config --global --unset core.gitproxy

@@ -68,7 +68,7 @@ set autoindent               " enable autoindent
 set tabstop=4                " insert 2 spaces for a tab
 set shiftwidth=4             " the number of space characters inserted for indentation
 syntax on                    " enable syntax highlighting
-colors default               " vim color scheme
+" colors default               " vim color scheme
 set autoread                 " auto read when file is changed from outside
 " set mouse=a                  " mouse support
 if has("gui_running")        " GUI color and font settings
@@ -98,6 +98,7 @@ augroup PYTHON
     autocmd FileType py setlocal foldmethod=indent foldlevelstart=999 foldminlines=0
 augroup END
 
+let g:molokai_original = 1
 " tmux will only forward escape sequences to the terminal if surrounded by a DCS sequence
 " http://sourceforge.net/mailarchive/forum.php?thread_name=AANLkTinkbdoZ8eNR1X2UobLTeww1jFrvfJxTMfKSq-L%2B%40mail.gmail.com&forum_name=tmux-users
 if exists('$TMUX')

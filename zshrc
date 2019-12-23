@@ -64,7 +64,7 @@ setopt no_nomatch
 export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -89,6 +89,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll='ls -alF'
+alias tree='tree -L 3'
 # alias vim='/usr/local/Cellar/vim/8.0.1150/bin/vim'
 # alias vi='/usr/local/Cellar/vim/8.0.1150/bin/vim'
 alias pss='/usr/local/bin/pss --noheading --nobreak'
@@ -174,7 +175,11 @@ checkdd() {
 	sudo kill -USR1 $(pgrep ^dd)
 }
 
-export GREP_OPTIONS="-irns --exclude-dir=.git --exclude=tags"
+watchpid() {
+	watch pstree -alt `pgrep -f -o $1`
+}
+
+export GREP_OPTIONS="-rns --exclude-dir=.git --exclude=tags"
 
 # path of anaconda3
 scipyon() {

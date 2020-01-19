@@ -86,6 +86,8 @@ set backspace=2              " make backspace work like most other apps
 set ignorecase               " Ignore case when searching
 set hlsearch                 " Highlight search things
 
+autocmd FileType markdown set expandtab
+
 " set foldmethod=syntax
 set foldmethod=indent
 set foldlevel=5

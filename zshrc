@@ -8,6 +8,7 @@ export ZSH=/$HOME/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
+#ZSH_THEME="random"
 # ZSH_THEME="ys"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -57,7 +58,7 @@ plugins=(autojump)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
+# PROMPT=%m${PROMPT}
 # fix arguments input error "no matches found"
 setopt no_nomatch
 
@@ -139,15 +140,15 @@ proxyon() {
 		networksetup -setsecurewebproxystate "Wi-Fi" on
 		networksetup -setsocksfirewallproxystate "Wi-Fi" on
 	fi
-	#
-	curl ip.gs
+
+	curl https://api.ip.sb/geoip
 }
 
 proxyoff() {
-    export http_proxy=
-    export https_proxy=
-	export all_proxy=
-	export socks5_proxy=
+	unset http_proxy
+	unset https_proxy
+	unset all_proxy
+	unset socks5_proxy
 	git config --global --unset http.proxy
 	git config --global --unset https.proxy
 	git config --global --unset core.gitproxy
@@ -159,7 +160,7 @@ proxyoff() {
 		networksetup -setsocksfirewallproxystate "Wi-Fi" off
 	fi
 
-	curl ip.gs
+	curl https://api.ip.sb/geoip
 }
 
 sshtunnelon() {

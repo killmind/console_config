@@ -58,7 +58,7 @@ plugins=(autojump)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-# PROMPT=%m${PROMPT}
+PROMPT=%m${PROMPT}
 # fix arguments input error "no matches found"
 setopt no_nomatch
 
@@ -89,6 +89,7 @@ export LANG=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias gti='git'
 alias ll='ls -alF'
 alias tree='tree -L 3'
 # alias vim='/usr/local/Cellar/vim/8.0.1150/bin/vim'
@@ -180,8 +181,6 @@ watchpid() {
 	watch pstree -alt `pgrep -f -o $1`
 }
 
-export GREP_OPTIONS="-rns --exclude-dir=.git --exclude=tags"
-
 # path of anaconda3
 scipyon() {
 	export PATH="$HOME/anaconda3/bin:$PATH"
@@ -190,3 +189,5 @@ scipyon() {
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+
+export PATH=~/.local/bin:"$PATH"

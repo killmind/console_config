@@ -64,8 +64,8 @@ filetype plugin indent on    " enable filetype-specific plugins
 set history=500               " keep 500 lines of command line history
 set number                   " enable line numbers
 set autoindent               " enable autoindent
-" set noexpandtab                " use space instead of tab
-set tabstop=4                " insert 2 spaces for a tab
+set expandtab                " use space instead of tab
+set tabstop=4                " insert 4 spaces for a tab
 set shiftwidth=4             " the number of space characters inserted for indentation
 syntax on                    " enable syntax highlighting
 " colors default               " vim color scheme
@@ -167,7 +167,7 @@ let g:tagbar_autofocus = 1
 " open sidebar
 map <silent> <F2> :NERDTreeToggle<CR>
 " --- Hex editor
-map <silent> <F6> ::%!xxd<cr>
+map <silent> <F6> ::%!xxd -g 1<cr>
 " --- tagbar
 map <silent> <F9> :TagbarToggle<cr>
 " --- Gundo: document history. Not work on python 3.7

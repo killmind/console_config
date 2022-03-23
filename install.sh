@@ -5,12 +5,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	brew install cmake macvim
 else
     # assuming Ubuntu Linux
-	sudo apt install git repo vim clang build-essential cmake python3-dev
+	sudo apt install git vim clang build-essential cmake python3-dev autojump
 fi
 
-if [ ! -d .vim/bundle/Vundle ]
+if [ ! -d vim/bundle/Vundle ]
 then
-    git clone https://github.com/gmarik/Vundle.vim.git  vim/bundle/Vundle.vim
+    git clone https://github.com/gmarik/vundle.vim.git vim/bundle/vundle
 fi
 if [ ! -d oh-my-zsh ]
 then

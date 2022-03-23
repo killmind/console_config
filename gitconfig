@@ -1,6 +1,6 @@
 [user]
 	name = Hao Zhang
-	email = hao.zhang@yuneec.com
+	email = hao.zhang@verisilicon.com
 	editor = vim
 [color]
 	ui = auto
@@ -19,10 +19,6 @@
     last = log -1 HEAD
 [oh-my-zsh]
 	hide-status = 1
-#[url "ssh://hao.zhang@gerrit.yuneec.com:29418/github/public"]
-#        insteadOf = https://github.com
-#[url "ssh://hao.zhang@gerrit.yuneec.com:29418/github/private"]
-#        insteadOf = git@github.com:YUNEEC
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
